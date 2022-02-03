@@ -4,8 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/TheEmperorPavel-II/AndroidStudioProjects/PhoneBook/app/src/main/res/layout/activity_main.xml" value="0.11503623188405797" />
+        <entry key="..\:/Users/TheEmperorPavel-II/AndroidStudioProjects/PhoneBook/app/src/main/res/layout/contact_recycler_view_item.xml" value="0.11503623188405797" />
         <entry key="..\:/Users/TheEmperorPavel-II/AndroidStudioProjects/PhoneBook/app/src/main/res/layout/fragment_contact_info.xml" value="0.11503623188405797" />
-        <entry key="..\:/Users/TheEmperorPavel-II/AndroidStudioProjects/PhoneBook/app/src/main/res/layout/fragment_contacts_list.xml" value="0.11503623188405797" />
+        <entry key="..\:/Users/TheEmperorPavel-II/AndroidStudioProjects/PhoneBook/app/src/main/res/layout/fragment_contacts_list.xml" value="0.22" />
       </map>
     </option>
   </component>
