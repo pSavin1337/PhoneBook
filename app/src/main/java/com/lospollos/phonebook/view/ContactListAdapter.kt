@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.lospollos.phonebook.R
+import com.lospollos.phonebook.models.ContactModel
 
 class ContactListAdapter(
-    var contactsList: ArrayList<String>,
-    var onContactClickCallback: (name: String) -> Unit
+    var contactsList: ArrayList<ContactModel>,
+    var onContactClickCallback: (contact: ContactModel) -> Unit
     ): RecyclerView.Adapter<ContactListAdapter.ContactViewHolder>() {
 
     class ContactViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -26,10 +27,10 @@ class ContactListAdapter(
     }
 
     override fun onBindViewHolder(holder: ContactViewHolder, position: Int) {
-        val contactName = contactsList[position]
+        val contactName = contactsList[position].name
         holder.contactTextView?.text = contactName
         holder.contactTextView?.setOnClickListener {
-            onContactClickCallback(contactName)
+            onContactClickCallback(contactsList[position])
         }
     }
 

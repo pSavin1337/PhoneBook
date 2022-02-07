@@ -1,13 +1,14 @@
 package com.lospollos.phonebook.view.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.lospollos.phonebook.R
+import com.lospollos.phonebook.view.viewInterfaces.ContactsUpdateView
+import moxy.MvpFragment
 
-class ContactInfoFragment : Fragment() {
+class ContactInfoFragment : MvpFragment(), ContactsUpdateView {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

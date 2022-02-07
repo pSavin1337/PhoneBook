@@ -1,23 +1,29 @@
 package com.lospollos.phonebook.view.fragments
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lospollos.phonebook.R
+import com.lospollos.phonebook.models.ContactModel
+import com.lospollos.phonebook.presenters.ContactsListPresenter
 import com.lospollos.phonebook.view.ContactListAdapter
 import com.lospollos.phonebook.view.activity.MainActivity
+import com.lospollos.phonebook.view.viewInterfaces.ContactsListView
+import moxy.MvpFragment
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 
-class ContactsListFragment : Fragment() {
+class ContactsListFragment : MvpFragment(), ContactsListView {
+
+    private var recyclerView: RecyclerView? = null
+    @InjectPresenter
+    lateinit var contactsListPresenter: ContactsListPresenter
+
+    @ProvidePresenter
+    fun providePresenter() = ContactsListPresenter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,13 +33,30 @@ class ContactsListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(activity)
-        val adapter = ContactListAdapter(
-            ArrayList<String>(0),//TODO
-            {}//TODO
+        contactsListPresenter.getContactsList()
+        recyclerView = view.findViewById(R.id.recyclerView)
+    }
+
+    override fun showContacts(contacts: ArrayList<ContactModel>?) {
+        recyclerView?.layoutManager = LinearLayoutManager(activity)
+        if (contacts != null) {
+            val adapter = ContactListAdapter(
+                contacts,
+                contactsListPresenter::onContactClick
+            )
+            recyclerView?.adapter = adapter
+        }
+    }
+
+    override fun showInfo(contact: Bundle) {
+        (activity as MainActivity).navController.navigate(
+            R.id.action_contactsListFragment_to_contactInfoFragment2,
+            contact
         )
+    }
+
+    override fun closeInfo() {
+        (activity as MainActivity).navController.popBackStack()
     }
 
 }

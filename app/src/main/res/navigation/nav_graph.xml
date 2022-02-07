@@ -19,5 +19,12 @@
         android:id="@+id/contactInfoFragment2"
         android:name="com.lospollos.phonebook.view.fragments.ContactInfoFragment"
         android:label="fragment_contact_info"
-        tools:layout="@layout/fragment_contact_info" />
+        tools:layout="@layout/fragment_contact_info" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="number"
+            app:argType="string" />
+    </fragment>
 </navigation>
