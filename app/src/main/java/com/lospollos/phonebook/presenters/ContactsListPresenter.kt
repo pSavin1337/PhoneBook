@@ -7,9 +7,10 @@ import com.lospollos.phonebook.view.viewInterfaces.ContactsListView
 import kotlinx.coroutines.*
 import moxy.InjectViewState
 import moxy.MvpPresenter
+import moxy.viewstate.strategy.alias.Skip
 
 @InjectViewState
-class ContactsListPresenter : MvpPresenter<ContactsListView>() {
+class ContactsListPresenter() : MvpPresenter<ContactsListView>() {
 
     private val job = Job()
     private val scope = CoroutineScope(job + Dispatchers.Main.immediate)
@@ -25,14 +26,14 @@ class ContactsListPresenter : MvpPresenter<ContactsListView>() {
                 viewState.showContacts(contacts)
             }
         }
-
     }
 
+    @Skip
     fun onContactClick(contact: ContactModel) {
         val args = Bundle()
         args.putString("name", contact.name)
         args.putString("number", contact.number)
-        //viewState.showInfo(args)
+        viewState.showInfo(args)
     }
 
     override fun onDestroy() {

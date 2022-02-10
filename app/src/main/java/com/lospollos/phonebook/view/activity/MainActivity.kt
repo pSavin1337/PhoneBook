@@ -8,7 +8,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.lospollos.phonebook.R
+import com.lospollos.phonebook.data.ContactProvider
+import com.lospollos.phonebook.models.ContactModel
 import com.lospollos.phonebook.presenters.ActivityPresenter
 import com.lospollos.phonebook.view.viewInterfaces.ActivityView
 import moxy.MvpAppCompatActivity
@@ -35,7 +38,10 @@ class MainActivity : MvpAppCompatActivity(), ActivityView {
                 application
             }
 
-        } //TODO: MVP, Update
+        }
+
+    override fun onSupportNavigateUp()
+            = findNavController(R.id.main_container).navigateUp()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

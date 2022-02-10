@@ -12,13 +12,14 @@ import com.lospollos.phonebook.presenters.ContactsListPresenter
 import com.lospollos.phonebook.view.ContactListAdapter
 import com.lospollos.phonebook.view.activity.MainActivity
 import com.lospollos.phonebook.view.viewInterfaces.ContactsListView
-import moxy.MvpFragment
+import moxy.MvpAppCompatFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
-class ContactsListFragment : MvpFragment(), ContactsListView {
+class ContactsListFragment : MvpAppCompatFragment(), ContactsListView {
 
     private var recyclerView: RecyclerView? = null
+
     @InjectPresenter
     lateinit var contactsListPresenter: ContactsListPresenter
 
