@@ -58,7 +58,7 @@ class ContactProvider {
             ContentProviderOperation.newUpdate(Data.CONTENT_URI)
                 .withSelection(where, args)
                 .withValue(
-                    StructuredName.GIVEN_NAME,
+                    StructuredName.DISPLAY_NAME_PRIMARY,
                     contactForUpdate.name
                 )
                 .build()
@@ -73,6 +73,20 @@ class ContactProvider {
                 .withValue(Data.DATA1, contactForUpdate.number)
                 .build()
         )
+
+        where =
+            "${RawContacts.DISPLAY_NAME_PRIMARY} = ?"
+        args[0] = contact.name
+        operations.add(
+            ContentProviderOperation.newUpdate(RawContacts.CONTENT_URI)
+                .withSelection(where, args)
+                .withValue(
+                    RawContacts.DISPLAY_NAME_PRIMARY,
+                    contactForUpdate.name
+                )
+                .build()
+        )
+
         try {
             context.contentResolver.applyBatch(ContactsContract.AUTHORITY, operations)
             return true
