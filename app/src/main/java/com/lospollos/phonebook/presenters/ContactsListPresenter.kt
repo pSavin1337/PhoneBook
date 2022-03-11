@@ -15,11 +15,13 @@ class ContactsListPresenter() : MvpPresenter<ContactsListView>() {
     private val job = Job()
     private val scope = CoroutineScope(job + Dispatchers.Main.immediate)
 
+    private val contactProvider = ContactProvider()
+
     fun getContactsList() {
         var contacts: ArrayList<ContactModel>? = null
         scope.launch {
             contacts = withContext(Dispatchers.IO) {
-                ContactProvider().getContacts()
+                contactProvider.getContacts()
             }
         }.invokeOnCompletion {
             if(it == null) {
@@ -31,14 +33,21 @@ class ContactsListPresenter() : MvpPresenter<ContactsListView>() {
     @Skip
     fun onContactClick(contact: ContactModel) {
         val args = Bundle()
+        args.putString("id", contact.id)
         args.putString("name", contact.name)
         args.putString("number", contact.number)
+        args.putString("avatar", contact.colorAvatar)
         viewState.showInfo(args)
     }
 
     override fun onDestroy() {
         super.onDestroy()
         scope.cancel()
+    }
+
+    @Skip
+    fun onPause(contacts: List<ContactModel>) {
+        contactProvider.saveContactsInfo(contacts)
     }
 
 }

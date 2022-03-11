@@ -6,6 +6,12 @@
     android:layout_height="wrap_content"
     android:padding="10dp">
 
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/avatar" />
+
     <TextView
         android:id="@+id/contactCardTextView"
         android:layout_width="match_parent"

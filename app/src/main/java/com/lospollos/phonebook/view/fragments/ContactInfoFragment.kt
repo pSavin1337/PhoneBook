@@ -34,8 +34,10 @@ class ContactInfoFragment : MvpAppCompatFragment(), ContactsUpdateView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val currentContact = ContactModel(
+            arguments?.getString("id")!!,
             arguments?.getString("name")!!,
-            arguments?.getString("number")!!
+            arguments?.getString("number")!!,
+            arguments?.getString("avatar")!!
         )
         val nameForm = view.findViewById<EditText>(R.id.nameEditText)
         val numberForm = view.findViewById<EditText>(R.id.numberEditText)
@@ -44,8 +46,10 @@ class ContactInfoFragment : MvpAppCompatFragment(), ContactsUpdateView {
         numberForm.setText(arguments?.getString("number"))
         submitButton.setOnClickListener {
             val newContact = ContactModel(
+                arguments?.getString("id")!!,
                 nameForm.text.toString(),
-                numberForm.text.toString()
+                numberForm.text.toString(),
+                arguments?.getString("avatar")!!
             )
             contactsUpdatePresenter.updateContacts(currentContact, newContact)
             (activity as MainActivity).navController.popBackStack()

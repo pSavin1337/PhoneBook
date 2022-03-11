@@ -4,4 +4,5 @@
     <string name="number_edit_text_hint">Введите новый номер</string>
     <string name="name_edit_text_hint">Введите новое имя</string>
     <string name="permissions_denied_text">"Требуется установить разрешения"</string>
+    <string name="avatar">avatar</string>
 </resources>

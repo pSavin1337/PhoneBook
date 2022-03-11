@@ -19,6 +19,7 @@ import moxy.presenter.ProvidePresenter
 class ContactsListFragment : MvpAppCompatFragment(), ContactsListView {
 
     private var recyclerView: RecyclerView? = null
+    private var contacts: List<ContactModel>? = null
 
     @InjectPresenter
     lateinit var contactsListPresenter: ContactsListPresenter
@@ -38,9 +39,17 @@ class ContactsListFragment : MvpAppCompatFragment(), ContactsListView {
         recyclerView = view.findViewById(R.id.recyclerView)
     }
 
+    override fun onPause() {
+        super.onPause()
+        if (contacts != null) {
+            contactsListPresenter.onPause(contacts!!)
+        }
+    }
+
     override fun showContacts(contacts: ArrayList<ContactModel>?) {
         recyclerView?.layoutManager = LinearLayoutManager(activity)
         if (contacts != null) {
+            this.contacts = contacts
             val adapter = ContactListAdapter(
                 contacts,
                 contactsListPresenter::onContactClick
